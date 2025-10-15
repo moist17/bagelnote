@@ -1,0 +1,38 @@
+baseURL = 'https://example.org/'
+languageCode = 'zh-tw'
+title = 'bagel notes'
+theme = 'shibui'
+
+[services]
+  [services.googleAnalytics]
+    ID = 'G-0T7DKFE6WT'
+
+[params]
+  description = "just an npc"
+  author = "liz chen"
+
+[menu]
+  [[menu.main]]
+    name = "首頁"
+    url = "/"
+    weight = 1
+  
+  [[menu.main]]
+    name = "文章"
+    url = "/posts/"
+    weight = 2
+  
+  [[menu.main]]
+    name = "關於"
+    url = "/pages/about/"
+    weight = 3
+  
+  [[menu.main]]
+    name = "Blog Roll"
+    url = "/pages/blog-roll/"
+    weight = 4
+  
+  [[menu.main]]
+    name = "Sketchbook"
+    url = "/pages/sketchbook/"
+    weight = 5

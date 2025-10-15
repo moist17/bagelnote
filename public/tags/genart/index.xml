@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Genart on bagel notes</title>
+    <link>http://localhost:1313/tags/genart/</link>
+    <description>Recent content in Genart on bagel notes</description>
+    <generator>Hugo</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Sun, 22 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/genart/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChatGPT 繪圖</title>
+      <link>http://localhost:1313/posts/note-to-self-chatgpt/</link>
+      <pubDate>Sun, 22 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/note-to-self-chatgpt/</guid>
+      <description>&lt;p&gt;昨天用 Proecreate 畫了兩張圖，分別是 Sabrina Carpenter 新專輯封面，以及以朋友的照片為靈感。對我這個生手來說，效果已經算滿意了（標準很低），不過後來又請 ChatGPT 修改，蠻令人驚豔的。不過我丟粗稿，餵給 ChatGPT 出精稿，這樣還算是我的作品嗎？&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/untitled_artwork-8.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/chatgpt-image-jun-23-2025-at-01_25_31-am-2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;另外一組 Sabrina Carpenter，ChatGPT 以內容政策為由拒絕修改圖片，不過提供了一版教育性的卡片，我覺得也不差。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/untitled_artwork-2-5.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/chatgpt-image-jun-23-2025-at-01_28_01-am-3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.instagram.com/p/DKxDWGBxybt/&#34;&gt;Sabrina Carperter 的原始專輯封面。&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
