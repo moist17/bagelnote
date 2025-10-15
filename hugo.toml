@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://bagelnote.netlify.app'
 languageCode = 'zh-tw'
 title = 'bagel notes'
 theme = 'shibui'
