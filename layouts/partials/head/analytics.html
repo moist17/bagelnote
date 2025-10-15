@@ -1,12 +1,8 @@
-{{ if not .Site.IsServer }}
-{{ with site.Services.GoogleAnalytics.ID }}
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0T7DKFE6WT"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', '{{ . }}');
+  gtag('config', 'G-0T7DKFE6WT');
 </script>
-{{ end }}
-{{ end }}
