@@ -1,3 +1,4 @@
+{{ if not hugo.IsServer }}
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0T7DKFE6WT"></script>
 <script>
@@ -6,3 +7,4 @@
   gtag('js', new Date());
   gtag('config', 'G-0T7DKFE6WT');
 </script>
+{{ end }}
