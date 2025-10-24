@@ -1,12 +1,13 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
 # Hugo
 /public/
 /resources/_gen/
 /assets/jsconfig.json
 hugo_stats.json
-
-# OS
-.DS_Store
-Thumbs.db
 
 # IDE
 .vscode/
@@ -15,6 +16,15 @@ Thumbs.db
 *.swo
 *~
 
+# Logs
+*.log
+
+# Dependencies
+node_modules/
+
 # Temporary files
 *.tmp
-.DS_Store
+*.temp
+
+# Windows
+Thumbs.db
