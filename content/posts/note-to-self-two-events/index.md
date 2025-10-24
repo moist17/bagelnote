@@ -1,11 +1,11 @@
 ---
-title: “應該要有什麼反應？”
+title: 應該要有什麼反應？
 date: 2025-10-23
 categories: 
-  - "note-to-self"
+  - note-to-self
 tags: 
-  - “feminist”
-  - “workplace”
+  - feminist
+  - workplace
 coverImage: ""
 ---
 
