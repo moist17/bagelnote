@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="zh-TW">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main class="container">
+			<ul class="post-list">
+				{posts.map((post) => (
+					<li>
+						<hr />
+						<a href={`/blog/${post.id}/`} class="post-row">
+							<span class="post-date">
+								<FormattedDate date={post.data.pubDate} />
+							</span>
+							<span class="post-title">{post.data.title}</span>
+						</a>
+					</li>
+				))}
+				<li><hr /></li>
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		padding-top: 0;
+		padding-bottom: 2rem;
+	}
+	.post-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.post-row {
+		display: grid;
+		grid-template-columns: 5rem 1fr;
+		gap: 1rem;
+		align-items: center;
+		padding: 0.65rem 0;
+		color: var(--fg);
+		text-decoration: none;
+	}
+	.post-row:hover {
+		opacity: 0.6;
+	}
+	.post-date {
+		font-size: 0.875rem;
+		color: var(--fg-muted);
+		font-variant-numeric: tabular-nums;
+	}
+	.post-title {
+		font-size: 1rem;
+		font-weight: 400;
+	}
+
+	@media (max-width: 640px) {
+		main { padding: 1rem 1.25rem 2rem; }
+		.post-row {
+			grid-template-columns: 4rem 1fr;
+			gap: 0.75rem;
+		}
+	}
+</style>

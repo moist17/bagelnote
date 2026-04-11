@@ -1,0 +1,53 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<html lang="zh-TW">
+	<head>
+		<BaseHead title={`Sketchbook | ${SITE_TITLE}`} description="插圖塗鴉" />
+		<style>
+			main {
+				padding-top: 1rem;
+				padding-bottom: 3rem;
+			}
+			h1 {
+				font-size: 1rem;
+				font-weight: 700;
+				margin-bottom: 1.5rem;
+			}
+			.gallery {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+				gap: 1rem;
+			}
+			.gallery img {
+				width: 100%;
+				height: auto;
+				display: block;
+			}
+			@media (max-width: 640px) {
+				main { padding: 1rem 1.25rem 3rem; }
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="container">
+			<h1>Sketchbook</h1>
+			<div class="gallery">
+				<img src="https://lizchen.co/wp-content/uploads/2023/11/img_2337.jpg?w=1024" alt="" />
+				<img src="https://lizchen.co/wp-content/uploads/2023/11/img_2339.jpg?w=1024" alt="" />
+				<img src="https://lizchen.co/wp-content/uploads/2023/11/img_2298.jpg?w=1024" alt="" />
+				<img src="https://lizchen.co/wp-content/uploads/2023/11/img_2338.jpg?w=714" alt="" />
+				<img src="https://lizchen.co/wp-content/uploads/2023/11/page0.jpg?w=576" alt="" />
+				<img src="https://lizchen.co/wp-content/uploads/2023/11/page0-2.jpg?w=576" alt="" />
+				<img src="https://bagelnote.wordpress.com/wp-content/uploads/2025/06/untitled_artwork-2-2.png?resize=1200%2C1200" alt="" />
+				<img src="https://bagelnote.wordpress.com/wp-content/uploads/2025/06/untitled_artwork-3.png?resize=2000%2C2000" alt="" />
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

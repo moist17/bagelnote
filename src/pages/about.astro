@@ -1,0 +1,82 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<html lang="zh-TW">
+	<head>
+		<BaseHead title={`About | ${SITE_TITLE}`} description="About Liz Chen" />
+	</head>
+	<body>
+		<Header />
+		<main class="container">
+			<div class="about">
+				<img
+					src="https://lizchen.co/wp-content/uploads/2023/11/021c6o8.png?w=1003"
+					alt="Liz Chen"
+					class="avatar"
+				/>
+				<div class="bio">
+					<p>哈囉，我叫 Liz Chen，因為喜歡貝果所以命名為 Bagel Note。這裡會記錄一些我的讀書觀影心得，跟日常瑣事等等。如果需要聯繫或說笑話，可以發電子郵件給我：<a href="mailto:hi@lizchen.co">hi@lizchen.co</a></p>
+					<p class="links">
+						<a href="https://mastodon.social/@summer___ends" target="_blank">Mastodon</a>
+						<span class="sep">|</span>
+						<a href="https://letterboxd.com/lizchen/" target="_blank">Letterboxd</a>
+						<span class="sep">|</span>
+						<a href="https://www.serializd.com/user/lizchen/profile" target="_blank">Serialized</a>
+						<span class="sep">|</span>
+						<a href="https://www.goodreads.com/user/show/3888211-liz-chen" target="_blank">GoodReads</a>
+					</p>
+				</div>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		padding-top: 2rem;
+		padding-bottom: 3rem;
+	}
+	.about {
+		display: flex;
+		gap: 2.5rem;
+		align-items: flex-start;
+	}
+	.avatar {
+		width: 200px;
+		flex-shrink: 0;
+	}
+	.bio {
+		padding-top: 0.25rem;
+		font-size: 0.95rem;
+		line-height: 1.75;
+	}
+	.bio p {
+		margin: 0 0 1rem 0;
+	}
+	.links {
+		color: var(--fg-muted);
+		font-size: 0.875rem;
+	}
+	.links a {
+		color: var(--fg);
+	}
+	.sep {
+		margin: 0 0.4rem;
+		color: var(--border);
+	}
+
+	@media (max-width: 580px) {
+		.about {
+			flex-direction: column;
+			gap: 1.5rem;
+		}
+		.avatar {
+			width: 140px;
+		}
+	}
+</style>
