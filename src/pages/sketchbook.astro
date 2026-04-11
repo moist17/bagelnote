@@ -25,9 +25,33 @@ import { SITE_TITLE } from '../consts';
 			}
 			.gallery img {
 				width: 100%;
-				height: auto;
+				height: 240px;
+				object-fit: cover;
 				display: block;
+				cursor: zoom-in;
 			}
+
+			/* Lightbox */
+			.lightbox {
+				display: none;
+				position: fixed;
+				inset: 0;
+				background: rgba(0, 0, 0, 0.85);
+				z-index: 100;
+				cursor: zoom-out;
+				align-items: center;
+				justify-content: center;
+			}
+			.lightbox.open {
+				display: flex;
+			}
+			.lightbox img {
+				max-width: 90vw;
+				max-height: 90vh;
+				object-fit: contain;
+				cursor: default;
+			}
+
 			@media (max-width: 640px) {
 				main { padding: 1rem 1.25rem 3rem; }
 			}
@@ -48,6 +72,34 @@ import { SITE_TITLE } from '../consts';
 				<img src="https://bagelnote.wordpress.com/wp-content/uploads/2025/06/untitled_artwork-3.png?resize=2000%2C2000" alt="" />
 			</div>
 		</main>
+
+		<!-- Lightbox overlay -->
+		<div class="lightbox" id="lightbox">
+			<img id="lightbox-img" src="" alt="" />
+		</div>
+
 		<Footer />
+
+		<script>
+			const lightbox = document.getElementById('lightbox');
+			const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+
+			document.querySelectorAll('.gallery img').forEach(img => {
+				img.addEventListener('click', () => {
+					lightboxImg.src = (img as HTMLImageElement).src;
+					lightbox!.classList.add('open');
+				});
+			});
+
+			lightbox!.addEventListener('click', (e) => {
+				if (e.target !== lightboxImg) {
+					lightbox!.classList.remove('open');
+				}
+			});
+
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape') lightbox!.classList.remove('open');
+			});
+		</script>
 	</body>
 </html>
