@@ -17,4 +17,13 @@ const blog = defineCollection({
 		}),
 });
 
-export const collections = { blog };
+const notes = defineCollection({
+	// Load Markdown files in the `src/content/notes/` directory.
+	loader: glob({ base: './src/content/notes', pattern: '**/*.md' }),
+	// Short posts only need a publish date; the body is the note itself.
+	schema: z.object({
+		pubDate: z.coerce.date(),
+	}),
+});
+
+export const collections = { blog, notes };

@@ -1,0 +1,90 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const notes = (await getCollection('notes')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const rendered = await Promise.all(notes.map((note) => render(note)));
+---
+
+<!doctype html>
+<html lang="zh-TW">
+	<head>
+		<BaseHead title={`Notes | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main class="container">
+			<ul class="note-list">
+				{notes.map((note, i) => {
+					const { Content } = rendered[i];
+					return (
+						<li class="note">
+							<span class="note-date">
+								<FormattedDate date={note.data.pubDate} format="iso" />
+							</span>
+							<div class="note-body">
+								<Content />
+							</div>
+						</li>
+					);
+				})}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		padding-top: 0;
+		padding-bottom: 2rem;
+	}
+	.note-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.note-list > li {
+		margin-bottom: 0;
+		padding-left: 0;
+	}
+	.note-list > li::before {
+		content: none;
+	}
+	.note {
+		padding: 1.25rem 0;
+		border-bottom: 1px solid var(--border);
+	}
+	.note:last-child {
+		border-bottom: none;
+	}
+	.note-date {
+		display: block;
+		font-size: 0.8rem;
+		color: var(--fg-muted);
+		margin-bottom: 0.4rem;
+	}
+	.note-body {
+		font-size: 1rem;
+		line-height: 1.6;
+	}
+	.note-body :global(p) {
+		margin: 0 0 0.75rem;
+	}
+	.note-body :global(p:last-child) {
+		margin-bottom: 0;
+	}
+
+	@media (max-width: 640px) {
+		main {
+			padding: 1rem 1.25rem 2rem;
+		}
+	}
+</style>

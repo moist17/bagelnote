@@ -31,6 +31,41 @@ import { SITE_TITLE } from '../consts';
 					</p>
 				</div>
 			</div>
+
+			<hr class="divider" />
+
+			<section class="favorites">
+				<h2>我喜歡的部落格</h2>
+				<ul>
+					<li><a href="https://muan.co/" target="_blank">Mu-An Chiou</a></li>
+					<li><a href="https://neal.fun/" target="_blank">Neal.Fun</a></li>
+					<li><a href="https://craigmod.com/" target="_blank">Craig Mod</a></li>
+					<li><a href="http://www.pampamliu.com/" target="_blank">Pam Pam Liu</a></li>
+					<li><a href="https://murmuring.idv.tw/" target="_blank">Murmuring - 主婦的碎念日常</a></li>
+					<li><a href="https://zeals75.com/" target="_blank">熱情先決 - 徐仲威</a></li>
+					<li><a href="https://bugtender.com/" target="_blank">Bugtender</a></li>
+				</ul>
+
+				<h2>我喜歡的卡通人物</h2>
+				<img
+					class="cartoon-img"
+					src="https://lizchen.co/wp-content/uploads/2024/06/e86272aa-8ae0-4188-8214-e9631021d7c6_l0_001-3_19_2023-3_24_11-pm.jpg?w=1024"
+					alt=""
+				/>
+				<ul>
+					<li>Moomin Valley 裡的每個角色，尤其是 <a href="https://moomin.fandom.com/wiki/Little_My" target="_blank">Little My</a></li>
+					<li>大耳朵 <a href="https://ultimatepopculture.fandom.com/wiki/Cheburashka" target="_blank">Cheburashka</a></li>
+				</ul>
+
+				<h2>我常去的咖啡店</h2>
+				<ul>
+					<li><a href="https://www.instagram.com/sangthoo.workshop/" target="_blank">鬆土</a></li>
+					<li>咖啡梅</li>
+					<li>早秋咖啡</li>
+					<li>Homey's</li>
+					<li>小米酒咖啡店</li>
+				</ul>
+			</section>
 		</main>
 		<Footer />
 	</body>
@@ -69,6 +104,25 @@ import { SITE_TITLE } from '../consts';
 		margin: 0 0.4rem;
 		color: var(--border);
 	}
+	.divider {
+		margin: 2.5rem 0;
+	}
+	.favorites h2 {
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: var(--fg-muted);
+		margin: 2rem 0 0.5rem 0;
+	}
+	.favorites h2:first-child {
+		margin-top: 0;
+	}
+	.favorites ul {
+		line-height: 2;
+	}
+	.cartoon-img {
+		max-width: 360px;
+		margin: 1rem 0;
+	}
 
 	@media (max-width: 580px) {
 		.about {
@@ -76,7 +130,7 @@ import { SITE_TITLE } from '../consts';
 			gap: 1.5rem;
 		}
 		.avatar {
-			width: 140px;
+			width: 100%;
 		}
 	}
 </style>

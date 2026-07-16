@@ -6,4 +6,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	site: 'https://lizchen.co',
 	integrations: [mdx(), sitemap()],
+	redirects: {
+		'/blog-roll': '/about',
+	},
 });

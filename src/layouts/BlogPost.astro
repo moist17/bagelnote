@@ -20,8 +20,8 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 			<article>
 				<header class="post-header">
 					<p class="post-date">
-						<FormattedDate date={pubDate} format="full" />
-						{updatedDate && <span>（更新：<FormattedDate date={updatedDate} format="full" />）</span>}
+						<FormattedDate date={pubDate} format="iso" />
+						{updatedDate && <span>（更新：<FormattedDate date={updatedDate} format="iso" />）</span>}
 					</p>
 					<h1>{title}</h1>
 				</header>

@@ -1,7 +1,7 @@
 ---
 interface Props {
 	date: Date;
-	format?: 'short' | 'full';
+	format?: 'short' | 'full' | 'iso';
 }
 
 const { date, format = 'short' } = Astro.props;
@@ -17,8 +17,13 @@ const fullDate = date.toLocaleDateString('zh-TW', {
 	month: 'long',
 	day: 'numeric',
 });
+
+// YYYY-MM-DD
+const isoDate = `${date.getFullYear()}-${month}-${day}`;
+
+const formatted = format === 'short' ? shortDate : format === 'iso' ? isoDate : fullDate;
 ---
 
 <time datetime={date.toISOString()}>
-	{format === 'short' ? shortDate : fullDate}
+	{formatted}
 </time>

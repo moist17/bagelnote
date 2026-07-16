@@ -10,13 +10,25 @@ import HeaderLink from './HeaderLink.astro';
 			<p class="tagline">have a nice day!</p>
 		</div>
 		<nav>
-			<HeaderLink href="/about">Bagel Note: About</HeaderLink>
-			<HeaderLink href="/sketchbook">Sketchbook</HeaderLink>
-			<HeaderLink href="/blog-roll">♥</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
+			<HeaderLink href="/notes">Notes</HeaderLink>
+			<HeaderLink href="/sketchbook">Sketchbook</HeaderLink>
+			<HeaderLink href="/about">About</HeaderLink>
+			<button id="theme-toggle" type="button" aria-label="切換深色／淺色模式">
+				<span class="opt" data-value="light">light</span>/<span class="opt" data-value="dark">dark</span>
+			</button>
 		</nav>
 	</div>
 </header>
+
+<script is:inline>
+	document.getElementById('theme-toggle')?.addEventListener('click', function () {
+		var root = document.documentElement;
+		var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+		root.setAttribute('data-theme', next);
+		localStorage.setItem('theme', next);
+	});
+</script>
 
 <style>
 	header {
@@ -38,9 +50,10 @@ import HeaderLink from './HeaderLink.astro';
 		font-weight: 700;
 		display: block;
 		margin-bottom: 0.15rem;
+		text-decoration: none;
 	}
 	.site-title:hover {
-		opacity: 1;
+		color: var(--fg);
 	}
 	.tagline {
 		margin: 0;
@@ -50,9 +63,31 @@ import HeaderLink from './HeaderLink.astro';
 	nav {
 		display: flex;
 		flex-wrap: wrap;
+		align-items: center;
 		gap: 0.25rem 0;
 		justify-content: flex-end;
 		padding-top: 0.1rem;
+	}
+	#theme-toggle {
+		font-family: inherit;
+		font-size: 0.875rem;
+		background: none;
+		border: none;
+		color: var(--fg-muted);
+		padding: 0 0 0 0.6rem;
+		margin: 0;
+		cursor: pointer;
+	}
+	#theme-toggle .opt {
+		color: var(--fg-muted);
+	}
+	:root[data-theme="light"] #theme-toggle .opt[data-value="light"],
+	:root[data-theme="dark"] #theme-toggle .opt[data-value="dark"] {
+		color: var(--accent);
+		font-weight: 700;
+	}
+	#theme-toggle:hover .opt {
+		color: var(--accent);
 	}
 
 	@media (max-width: 640px) {
