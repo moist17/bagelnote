@@ -32,6 +32,13 @@
 	--accent: oklch(78% 0.15 150);
 	--accent-subtle: oklch(78% 0.15 150 / 10%);
 	--img-outline: rgba(255, 255, 255, 0.1);
+=======
+	--bg: #e8e8e8;
+	--fg: #1a1a1a;
+	--fg-muted: #666;
+	--border: #ccc;
+	--font: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+>>>>>>> origin/main
 }
 
 *, *::before, *::after {
