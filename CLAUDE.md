@@ -28,7 +28,20 @@ Routing: `src/pages/blog/index.astro` and `src/pages/blog/[...slug].astro` rende
 
 ### Publishing from Obsidian
 
-`scripts/publish_from_obsidian.py` copies a note from the Obsidian vault at `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/lizchen/BagelNotes` into this repo. The vault has `blog/` and `note/` subfolders; the script auto-detects which collection to publish into based on which subfolder the source file is in (falls back to an interactive prompt otherwise). For `blog`, it also prompts for a title/description if missing and generates a slug for the filename. It never modifies the original Obsidian file, and only writes into `src/content/{blog,notes}/` — a separate `git add/commit/push` is required to actually publish.
+`scripts/publish_from_obsidian.py` copies a note from the Obsidian vault at `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/lizchen/BagelNotes` into this repo and publishes it — fully automated, no prompts, no confirmation step. It's designed to be triggered from Obsidian itself (e.g. via the community "Shell commands" plugin bound to a hotkey/ribbon button), so it never blocks on stdin.
+
+```sh
+python scripts/publish_from_obsidian.py <Obsidian 筆記檔名>            # publish/update
+python scripts/publish_from_obsidian.py <Obsidian 筆記檔名> --delete   # unpublish
+```
+
+- The vault has `blog/` and `note/` subfolders; the script detects which collection to publish into based on which subfolder the source file is in. Files outside both folders are rejected with an error (no interactive fallback, since there's no one to prompt).
+- The output filename is derived from the **Obsidian source filename** (slugified), not the title — this makes it stable across edits, so re-running the script on an edited note overwrites/updates the same published file instead of creating a duplicate.
+- `blog` posts read `title`/`description` from the source note's own frontmatter (not prompted). Missing `description` aborts the whole run before writing or pushing anything, since the content collection schema requires it. On update, the original `pubDate` is preserved and `updatedDate` is set to today.
+- `note` posts have no title/description; on update, the original `pubDate` is preserved (notes don't have an `updatedDate` field).
+- On publish it runs `git add` + `commit` + `push` automatically; `--delete` looks up the previously-published file for that source note and runs `git rm` + `commit` + `push`. Either mode aborts loudly (non-zero exit) rather than partially completing if a git step fails.
+- It never modifies or deletes the original Obsidian file — only files under `src/content/{blog,notes}/` are touched.
+- Obsidian-side templates prefilling the expected frontmatter live in the vault at `templates/blog-template.md` and `templates/note-template.md`.
 
 Other one-off scripts in `scripts/` (`download-sketchbook.py`, `import-wordpress.py`) were used for the original WordPress-to-Astro migration and image hosting; not part of the regular workflow.
 
