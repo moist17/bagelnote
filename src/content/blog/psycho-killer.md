@@ -7,3 +7,4 @@ updatedDate: 2026-07-27
 
 psycho killer
 :)))
+lol wtf...
