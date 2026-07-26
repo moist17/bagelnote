@@ -2,13 +2,12 @@
 title: "辛苦你了子宮，RIP"
 description: "最近剛完成「次子宮全切除」手術，摘除子宮、輸卵管跟卵巢囊腫，想跟大家友分享手術狀況。"
 pubDate: "Jun 11 2024"
+heroImage: "../../assets/blog/hysterectomy/img_6505.jpg"
 categories:
   - "紙片"
 tags:
   - "hysterectomy"
 ---
-
-![](https://lizchen.co/wp-content/uploads/2024/06/img_6505.jpg?w=828)
 
 最近剛完成「次子宮全切除」手術，摘除子宮、輸卵管跟卵巢囊腫，想跟大家分享手術狀況。
 
