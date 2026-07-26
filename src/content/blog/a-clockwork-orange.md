@@ -2,6 +2,7 @@
 title: "發條橘子：喝牛奶的人都是心理變態"
 description: "暴力與性    * 亞歷戴著黑色寬沿帽，其中一隻眼睛戴著根根分明的假睫毛，穿著全身白色套裝，臀部有點像包尿布。他拿著棍子，毫不猶豫地棒打渾身臭味流浪老人跟，接著到一間充滿科幻味的豪宅 把女主人紅色的連..."
 pubDate: "Sep 22 2022"
+heroImage: "/blog/a-clockwork-orange/clockwork-orange-milk.png"
 categories:
   - "電影 Film"
 ---

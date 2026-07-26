@@ -2,6 +2,7 @@
 title: "PM 這份工作"
 description: "在與同事的午餐中，作者反思自己在工作中的性格，自認為是隱忍型的項目經理，難以在正式場合作出激烈反應。雖然對於寫文件、規劃和測試等工作感到滿意，但對於表面浮誇的預測和誇張的業務目標感到厭倦。"
 pubDate: "Jun 15 2025"
+heroImage: "/blog/note-to-myself-pm/an-introvert-female-project-manager-and-reluctantly-to-do-this.png"
 categories:
   - "note to self"
 ---

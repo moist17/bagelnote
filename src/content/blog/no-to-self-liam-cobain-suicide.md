@@ -2,6 +2,7 @@
 title: "21 歲的 Liam Gallagher 對 Kurt Cobain 自殺的反應"
 description: "https://www.youtube.com/watch?v=AoKqCIRpG9Y&rco=1   主持人：你當時正在幫小孩放歌，在米德爾斯堡？   Liam：對，米德爾斯堡。大家都說他自殺了，就..."
 pubDate: "Jul 15 2025"
+heroImage: "/blog/no-to-self-liam-cobain-suicide/kurtcobain06.jpg"
 categories:
   - "note to self"
 ---
