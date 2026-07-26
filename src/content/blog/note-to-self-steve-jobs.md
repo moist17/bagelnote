@@ -2,7 +2,7 @@
 title: "note to self | 賈伯斯的感恩詩"
 description: "今天蘋果上線賈伯斯檔案館 [Steve Jobs Archive](https://stevejobsarchive.com)，首頁是一封 2010 年賈伯斯寄給自己的電子短信，讚美各種人類發明，我還..."
 pubDate: "Sep 08 2022"
-heroImage: "/blog/note-to-self-steve-jobs/home-image-book.png"
+heroImage: "../../assets/blog/note-to-self-steve-jobs/home-image-book.png"
 categories:
   - "note to self"
 ---
