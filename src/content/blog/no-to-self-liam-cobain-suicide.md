@@ -7,7 +7,9 @@ categories:
   - "note to self"
 ---
 
-https://www.youtube.com/watch?v=AoKqCIRpG9Y&rco=1 
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin:1.5rem 0;">
+  <iframe src="https://www.youtube.com/embed/AoKqCIRpG9Y" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen loading="lazy"></iframe>
+</div>
 
 主持人：你當時正在幫小孩放歌，在米德爾斯堡？  
 Liam：對，米德爾斯堡。大家都說他自殺了，就這樣。
