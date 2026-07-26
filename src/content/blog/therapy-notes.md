@@ -2,6 +2,7 @@
 title: "心理諮商小記"
 description: "早上搭捷運看到背影身形跟穿著打扮有點像諮商師的路人，突然有點想哭。  歷經三年，今年八月底結束每個月 1-2 次的諮商，最難忘的還是第一次進到諮商室，她就強調自己的治療流派屬於心理動力學派，我不太懂，..."
 pubDate: "Sep 25 2024"
+heroImage: "../../assets/blog/therapy-notes/image.png"
 categories:
   - "紙片"
 tags:
