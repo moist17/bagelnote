@@ -174,6 +174,24 @@ def resolve_hero_image(slug, hero_image_value):
     return f"../../assets/blog/{slug}/{filename}"
 
 
+def copy_image(slug, filename):
+    """
+    把 Obsidian _attachments/blog/<slug>/<filename> 複製到 repo assets/blog/<slug>/<filename>。
+    回傳目的地路徑，找不到來源則回傳 None。
+    """
+    src = os.path.join(VAULT_ATTACHMENTS_DIR, slug, filename)
+    dst_dir = os.path.join(ASSETS_DIR, slug)
+    dst = os.path.join(dst_dir, filename)
+
+    if not os.path.exists(src):
+        print(f"找不到圖片：{src}，略過圖片複製。")
+        return None
+
+    os.makedirs(dst_dir, exist_ok=True)
+    shutil.copy2(src, dst)
+    return dst
+
+
 def copy_hero_image(slug, hero_image_value):
     """
     把 Obsidian _attachments/blog/<slug>/ 裡的圖片複製到 repo assets/blog/<slug>/。
@@ -181,19 +199,31 @@ def copy_hero_image(slug, hero_image_value):
     """
     if not hero_image_value:
         return False
-
     filename = os.path.basename(hero_image_value)
-    src = os.path.join(VAULT_ATTACHMENTS_DIR, slug, filename)
-    dst_dir = os.path.join(ASSETS_DIR, slug)
-    dst = os.path.join(dst_dir, filename)
+    return copy_image(slug, filename) is not None
 
-    if not os.path.exists(src):
-        print(f"找不到圖片：{src}，略過圖片複製。")
-        return False
 
-    os.makedirs(dst_dir, exist_ok=True)
-    shutil.copy2(src, dst)
-    return True
+def copy_inline_images(slug, body):
+    """
+    掃描內文裡所有 ![...](路徑) 的圖片，把檔案從 Obsidian _attachments 複製到 repo assets，
+    並把內文路徑統一轉換成 ../../assets/blog/<slug>/<filename>。
+    回傳 (新內文, 成功複製的圖片路徑清單)。
+    """
+    copied_paths = []
+    img_pattern = re.compile(r'!\[([^\]]*)\]\(([^)]+)\)')
+
+    def replace_img(match):
+        alt = match.group(1)
+        path = match.group(2)
+        filename = os.path.basename(path)
+        repo_path = f"../../assets/blog/{slug}/{filename}"
+        dst = copy_image(slug, filename)
+        if dst:
+            copied_paths.append(dst)
+        return f"![{alt}]({repo_path})"
+
+    new_body = img_pattern.sub(replace_img, body)
+    return new_body, copied_paths
 
 
 def do_publish(source_path):
@@ -223,6 +253,10 @@ def do_publish(source_path):
         pub_date = fields.get("pubDate", today)
 
     out_paths = [out_path]
+
+    # 處理內文圖片（blog 和 note 都適用）
+    body, inline_img_paths = copy_inline_images(slug, body)
+    out_paths.extend(inline_img_paths)
 
     if kind == "note":
         frontmatter = f"---\npubDate: {pub_date}\n---\n\n{body}\n"
