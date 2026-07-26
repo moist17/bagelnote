@@ -1,12 +1,11 @@
 ---
 title: "大熊餐廳"
-description: "![](https://lizchen.co/wp-content/uploads/2023/10/image-1.png?w=1024)    1. 一開始就是為了大熊餐廳開訂閱 Disney+ 但..."
+description: "一開始就是為了大熊餐廳開訂閱 Disney+ 但看得很沒勁，大概看了四集停滯，可能是一直在吵架。一個月後再看整個停不下來，一次看完八集，最後一集並且哭了。"
 pubDate: "Oct 16 2023"
+heroImage: "../../assets/blog/the-bear/image-1.png"
 categories:
   - "影集 TV Series"
 ---
-
-![](https://lizchen.co/wp-content/uploads/2023/10/image-1.png?w=1024)
 
   1. 一開始就是為了大熊餐廳開訂閱 Disney+ 但看得很沒勁，大概看了四集停滯，可能是一直在吵架。一個月後再看整個停不下來，一次看完八集，最後一集並且哭了。然後還立刻馬上開始重看。所謂會「想擁有」而不只是「看串流」就好的影集
   2. 應該是第六集開頭的長鏡頭（？），一鏡直線到底把廚房裡全部成員的緊繃情緒

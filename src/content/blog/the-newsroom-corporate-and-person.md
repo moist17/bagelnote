@@ -1,12 +1,11 @@
 ---
 title: "人跟企業有什麼不同？"
-description: "![tv series 'the newsroom' poster](https://lizchen.co/wp-content/uploads/2023/11/image.png?w=1024)..."
+description: "最近重看《新聞編輯室》，幾個有意思的情節：如果是一個人，它會為你撐住門，如果是企業，它撐了門就會跟你要錢。"
 pubDate: "Nov 14 2023"
+heroImage: "../../assets/blog/the-newsroom-corporate-and-person/image.png"
 categories:
   - "影集 TV Series"
 ---
-
-![tv series "the newsroom" poster](https://lizchen.co/wp-content/uploads/2023/11/image.png?w=1024)
 
 最近重看《新聞編輯室》，幾個有意思的情節：
 
