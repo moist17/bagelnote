@@ -23,21 +23,28 @@
     文章內容...
 
 沒有填 description 的話，為了不推出不完整的文章上線，腳本會中止並印出錯誤訊息。
+
+支援的 frontmatter 欄位：
+    title, description, pubDate, heroImage, categories, tags, updatedDate
 """
 
 import os
 import re
+import shutil
 import subprocess
 import sys
+import time
 from datetime import date
 
 VAULT_DIR = "/Users/lizchen/Library/Mobile Documents/iCloud~md~obsidian/Documents/lizchen/BagelNotes"
 VAULT_BLOG_DIR = os.path.join(VAULT_DIR, "blog")
 VAULT_NOTE_DIR = os.path.join(VAULT_DIR, "note")
+VAULT_ATTACHMENTS_DIR = os.path.join(VAULT_DIR, "_attachments", "blog")
 
 REPO_DIR = "/Users/lizchen/Projects/bagelnote-astro"
 BLOG_DIR = os.path.join(REPO_DIR, "src/content/blog")
 NOTES_DIR = os.path.join(REPO_DIR, "src/content/notes")
+ASSETS_DIR = os.path.join(REPO_DIR, "src/assets/blog")
 
 
 def slugify(text):
@@ -47,23 +54,55 @@ def slugify(text):
     return text.strip("-") or "post"
 
 
-def parse_frontmatter(text):
-    """回傳 (frontmatter dict, 內文)。frontmatter 只支援簡單的 key: value 一行一個。"""
+def parse_frontmatter_raw(text):
+    """回傳 (raw frontmatter string, 內文)。"""
     if not text.startswith("---"):
-        return {}, text.strip()
+        return "", text.strip()
     parts = text.split("---", 2)
     if len(parts) < 3:
-        return {}, text.strip()
-    raw_fm, body = parts[1], parts[2]
+        return "", text.strip()
+    return parts[1], parts[2].strip()
+
+
+def parse_frontmatter(text):
+    """回傳 (frontmatter dict, 內文)。支援 list 欄位（categories, tags）。"""
+    raw_fm, body = parse_frontmatter_raw(text)
+    if not raw_fm:
+        return {}, body
+
     fields = {}
+    current_key = None
+    current_list = None
+
     for line in raw_fm.splitlines():
-        line = line.strip()
-        if not line or ":" not in line:
+        # list item
+        if line.strip().startswith("- ") and current_key and current_list is not None:
+            current_list.append(line.strip()[2:].strip().strip('"').strip("'"))
             continue
-        key, _, value = line.partition(":")
-        value = value.strip().strip('"').strip("'")
-        fields[key.strip()] = value
-    return fields, body.strip()
+
+        if ":" in line and not line.startswith(" "):
+            # 儲存前一個 list
+            if current_key and current_list is not None:
+                fields[current_key] = current_list
+                current_list = None
+                current_key = None
+
+            key, _, value = line.partition(":")
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+
+            if value == "":
+                # 可能是 list
+                current_key = key
+                current_list = []
+            else:
+                fields[key] = value
+
+    # 最後一個 list
+    if current_key and current_list is not None:
+        fields[current_key] = current_list
+
+    return fields, body
 
 
 def kind_for_path(path):
@@ -106,15 +145,55 @@ def run_git(*args):
     return result.stdout
 
 
-def git_publish(out_path, commit_message):
-    run_git("add", out_path)
-    status = run_git("status", "--porcelain", out_path)
-    if not status.strip():
+def git_publish(out_paths, commit_message):
+    for p in out_paths:
+        run_git("add", p)
+    # 檢查是否有任何變更
+    status_lines = []
+    for p in out_paths:
+        s = run_git("status", "--porcelain", p)
+        if s.strip():
+            status_lines.append(s)
+    if not status_lines:
         print("內容跟上次發布的一樣，沒有變更可以提交。")
         return
     run_git("commit", "-m", commit_message)
     run_git("push")
     print("已發布上線。")
+
+
+def resolve_hero_image(slug, hero_image_value):
+    """
+    將 Obsidian 裡的 heroImage 路徑轉換成 repo 需要的路徑。
+    Obsidian 存的是檔名（例如 image.png），
+    repo 需要的是 ../../assets/blog/<slug>/<filename>
+    """
+    if not hero_image_value:
+        return None
+    filename = os.path.basename(hero_image_value)
+    return f"../../assets/blog/{slug}/{filename}"
+
+
+def copy_hero_image(slug, hero_image_value):
+    """
+    把 Obsidian _attachments/blog/<slug>/ 裡的圖片複製到 repo assets/blog/<slug>/。
+    回傳是否成功。
+    """
+    if not hero_image_value:
+        return False
+
+    filename = os.path.basename(hero_image_value)
+    src = os.path.join(VAULT_ATTACHMENTS_DIR, slug, filename)
+    dst_dir = os.path.join(ASSETS_DIR, slug)
+    dst = os.path.join(dst_dir, filename)
+
+    if not os.path.exists(src):
+        print(f"找不到圖片：{src}，略過圖片複製。")
+        return False
+
+    os.makedirs(dst_dir, exist_ok=True)
+    shutil.copy2(src, dst)
+    return True
 
 
 def do_publish(source_path):
@@ -141,7 +220,9 @@ def do_publish(source_path):
             existing_fields, _ = parse_frontmatter(f.read())
         pub_date = existing_fields.get("pubDate", today)
     else:
-        pub_date = today
+        pub_date = fields.get("pubDate", today)
+
+    out_paths = [out_path]
 
     if kind == "note":
         frontmatter = f"---\npubDate: {pub_date}\n---\n\n{body}\n"
@@ -161,6 +242,35 @@ def do_publish(source_path):
         lines = [f'title: "{title}"', f'description: "{description}"', f"pubDate: {pub_date}"]
         if is_update:
             lines.append(f"updatedDate: {today}")
+
+        # heroImage
+        hero_image = fields.get("heroImage", "")
+        if hero_image:
+            repo_hero = resolve_hero_image(slug, hero_image)
+            lines.append(f'heroImage: "{repo_hero}"')
+            img_copied = copy_hero_image(slug, hero_image)
+            if img_copied:
+                img_asset_path = os.path.join(ASSETS_DIR, slug, os.path.basename(hero_image))
+                out_paths.append(img_asset_path)
+
+        # categories
+        categories = fields.get("categories", [])
+        if isinstance(categories, list) and categories:
+            lines.append("categories:")
+            for cat in categories:
+                lines.append(f'  - "{cat}"')
+        elif isinstance(categories, str) and categories:
+            lines.append(f"categories:\n  - \"{categories}\"")
+
+        # tags
+        tags = fields.get("tags", [])
+        if isinstance(tags, list) and tags:
+            lines.append("tags:")
+            for tag in tags:
+                lines.append(f'  - "{tag}"')
+        elif isinstance(tags, str) and tags:
+            lines.append(f"tags:\n  - \"{tags}\"")
+
         frontmatter = "---\n" + "\n".join(lines) + f"\n---\n\n{body}\n"
         action_word = "更新" if is_update else "發布"
         commit_message = f"{action_word} blog: {title}"
@@ -170,7 +280,7 @@ def do_publish(source_path):
         f.write(frontmatter)
 
     print(f"已寫入：{out_path}")
-    git_publish(out_path, commit_message)
+    git_publish(out_paths, commit_message)
 
 
 def do_delete(source_path):
@@ -210,10 +320,14 @@ def main():
         print("用法：python scripts/publish_from_obsidian.py <Obsidian 筆記檔名> [--delete]")
         sys.exit(1)
 
-    source_path = find_file(args[0])
+    filename = args[0].replace("\\", "")
+    source_path = find_file(filename)
     if not source_path:
-        print(f"在 {VAULT_DIR} 裡找不到檔案：{args[0]}")
+        print(f"在 {VAULT_DIR} 裡找不到檔案：{filename}")
         sys.exit(1)
+
+    if not delete_mode:
+        time.sleep(1)
 
     if delete_mode:
         do_delete(source_path)
