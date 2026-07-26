@@ -9,8 +9,6 @@ tags:
   - "assisted-suicide"
 ---
 
-![Kurt Cobain's suicide note](/blog/uber-suicide/kurt-cobain-suicide-note.png)Photo Credit: Kurt Cobain 的遺書
-
 最近讀了一本有關輔助自殺研究的書，目前讀到現在發覺有兩個因素讓輔助自殺窒礙難行。
 
 第一，願意執行的醫師很少，因為醫師受的教育就是要拯救病患，無論狀況多糟多慘，也不放棄任何一絲機會。要他們做出讓病患致死的決定，還要親手殺人，違反他們一直以來的信念，對醫師而言切器官以活病患說不定都不比調配藥水看著病患一飲而盡簡單。
