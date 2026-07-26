@@ -2,13 +2,14 @@
 title: "UberDie 夢幻逸品何時問世？——輔助自殺／安樂死的隨手記"
 description: "最近讀了一本有關輔助自殺研究的書，目前讀到現在發覺有兩個因素讓輔助自殺窒礙難行。第一，願意執行的醫師很少，其次，假設某些人其實不想死，但因為社會氛圍的壓力而感到被迫接受輔助自殺。"
 pubDate: "Jun 22 2024"
+heroImage: "/blog/uber-suicide/kurt-cobain-suicide-note.png"
 categories:
   - "紙片"
 tags:
   - "assisted-suicide"
 ---
 
-![Kurt Cobain's suicide note](https://lizchen.co/wp-content/uploads/2024/06/kurt-cobain-suicide-note.png?w=900)Photo Credit: Kurt Cobain 的遺書
+![Kurt Cobain's suicide note](/blog/uber-suicide/kurt-cobain-suicide-note.png)Photo Credit: Kurt Cobain 的遺書
 
 最近讀了一本有關輔助自殺研究的書，目前讀到現在發覺有兩個因素讓輔助自殺窒礙難行。
 
