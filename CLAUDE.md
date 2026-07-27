@@ -45,6 +45,10 @@ python scripts/publish_from_obsidian.py <Obsidian 筆記檔名> --delete   # unp
 
 Other one-off scripts in `scripts/` (`download-sketchbook.py`, `import-wordpress.py`) were used for the original WordPress-to-Astro migration and image hosting; not part of the regular workflow.
 
+## Conventions
+
+- All git commit messages must be written in English.
+
 ### Other pages
 
 `src/pages/about.astro`, `blog-roll.astro`, and `sketchbook.astro` are standalone static pages. Site-wide nav is defined in `src/components/Header.astro`; global CSS variables (colors, fonts) live in `src/styles/global.css`.
