@@ -75,6 +75,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		font-size: 1rem;
 		line-height: 1.8;
 		max-width: 65ch;
+		text-align: justify;
+	}
+	.prose :global(p) {
+		text-wrap: unset;
 	}
 	.prose :global(img) {
 		margin: 1.5rem 0;
