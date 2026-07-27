@@ -15,7 +15,22 @@ import HeaderLink from './HeaderLink.astro';
 			<HeaderLink href="/sketchbook">Sketchbook</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 			<button id="theme-toggle" type="button" aria-label="切換深色／淺色模式">
-				<span class="opt" data-value="light">light</span>/<span class="opt" data-value="dark">dark</span>
+				<!-- 月亮：淺色模式時顯示（點了切換到深色） -->
+				<svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+				</svg>
+				<!-- 太陽：深色模式時顯示（點了切換到淺色） -->
+				<svg class="icon icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<circle cx="12" cy="12" r="5"/>
+					<line x1="12" y1="1" x2="12" y2="3"/>
+					<line x1="12" y1="21" x2="12" y2="23"/>
+					<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+					<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+					<line x1="1" y1="12" x2="3" y2="12"/>
+					<line x1="21" y1="12" x2="23" y2="12"/>
+					<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+					<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+				</svg>
 			</button>
 		</nav>
 	</div>
@@ -69,25 +84,29 @@ import HeaderLink from './HeaderLink.astro';
 		padding-top: 0.1rem;
 	}
 	#theme-toggle {
-		font-family: inherit;
-		font-size: 0.875rem;
 		background: none;
 		border: none;
 		color: var(--fg-muted);
 		padding: 0 0 0 0.6rem;
 		margin: 0;
 		cursor: pointer;
+		display: flex;
+		align-items: center;
+		line-height: 1;
 	}
-	#theme-toggle .opt {
-		color: var(--fg-muted);
-	}
-	:root[data-theme="light"] #theme-toggle .opt[data-value="light"],
-	:root[data-theme="dark"] #theme-toggle .opt[data-value="dark"] {
+	#theme-toggle:hover {
 		color: var(--accent);
-		font-weight: 700;
 	}
-	#theme-toggle:hover .opt {
-		color: var(--accent);
+	#theme-toggle .icon {
+		display: block;
+	}
+	/* 淺色模式：顯示月亮，隱藏太陽 */
+	:root:not([data-theme="dark"]) #theme-toggle .icon-sun {
+		display: none;
+	}
+	/* 深色模式：顯示太陽，隱藏月亮 */
+	:root[data-theme="dark"] #theme-toggle .icon-moon {
+		display: none;
 	}
 
 	@media (max-width: 640px) {
